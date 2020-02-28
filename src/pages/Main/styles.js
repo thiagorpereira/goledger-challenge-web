@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
 export const Container = styled.div`
   height: 100%;
@@ -6,6 +15,17 @@ export const Container = styled.div`
   flex: 1;
   padding: 20px;
   overflow-y: scroll;
+`;
+
+export const MenuContact = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  .delete {
+    :hover {
+      color: red;
+    }
+  }
 `;
 
 export const Header = styled.header`
@@ -17,13 +37,38 @@ export const Header = styled.header`
   h1 {
     font-size: 20px;
   }
+
+  /* .add-contact-content {
+    color: orange;
+  }
+
+  .add-contact-overlay {
+    background-color: grey;
+    color: orange;
+  } */
 `;
 
-export const ListContact = styled.ul`
+export const ListContact = styled.ul.attrs(props => ({
+  disabled: props.loading,
+}))`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   list-style: none;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  ${props =>
+    props.loading
+      ? css`
+          svg {
+            animation: ${rotate} 4s linear infinite;
+          }
+        `
+      : undefined}
 `;
 
 export const Contact = styled.li`
@@ -35,10 +80,19 @@ export const Contact = styled.li`
   header {
     display: flex;
     justify-content: space-between;
+
+    strong {
+      color: #7289da;
+    }
+
+    span {
+      color: #acacac;
+    }
   }
 
   p {
-    font-size: 18px;
+    font-size: 15px;
+    color: #acacac;
   }
 
   /* display: flex;

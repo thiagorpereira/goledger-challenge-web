@@ -31,6 +31,14 @@ module.exports = {
       'warn',
       { extensions: ['.jsx', '.js'] }
     ],
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
+    "react/prop-types": [2, { ignore: ['children'] }],
+    "jsx-a11y/label-has-for": [ 2, {
+      "components": [ "Label" ],
+      "required": {
+          "every": [ "nesting", "id" ]
+      },
+      "allowChildren": false
+    }]
   },
 };
